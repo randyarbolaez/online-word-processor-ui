@@ -46,10 +46,15 @@ const App = () => {
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, urlID });
     } else {
+      // window.history.pushState(
+      //   { isUserLoggedIn: true },
+      //   "Code Editor",
+      //   `http://localhost:3001/${generatedID}`
+      // );
       window.history.pushState(
         { isUserLoggedIn: true },
         "Code Editor",
-        `http://localhost:3001/${generatedID}`
+        `https://online-code-editor-throwaway.herokuapp.com/${generatedID}`
       );
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, generatedID });
