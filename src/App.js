@@ -4,6 +4,8 @@ import "./App.css";
 import io from "socket.io-client";
 import ENV from "./env";
 
+import { v4 as uuidv4, validate as uuidValidate } from "uuid";
+
 const socket = io(ENV.backendAPIUrl);
 
 const App = () => {
@@ -25,19 +27,33 @@ const App = () => {
     });
 
     socket.on("login", (data) => {
+      // setAllUsers(data.allUsers);
+      console.log(data);
       setNumberOfUsers(data.numUsers);
       setAllUsers(data.allUsers);
     });
 
     socket.on("new message", (data) => {
       setInputData(data.message);
-      console.log("DATA", data); // data will be 'woot'
     });
   }, []);
 
   const addUser = (e) => {
-    socket.emit("add user", username);
-    setIsUserLoggedIn(true);
+    let generatedID = uuidv4();
+    if (uuidValidate(window.location.href.split("/")[3])) {
+      let urlID = window.location.href.split("/")[3];
+      console.log(urlID, " }}urlID");
+      setIsUserLoggedIn(true);
+      socket.emit("add user", { username, urlID });
+    } else {
+      window.history.pushState(
+        { isUserLoggedIn: true },
+        "Code Editor",
+        `http://localhost:3001/${generatedID}`
+      );
+      setIsUserLoggedIn(true);
+      socket.emit("add user", { username, generatedID });
+    }
   };
 
   const onUsername = (e) => {
@@ -45,8 +61,9 @@ const App = () => {
   };
 
   const onUserTyping = (e) => {
+    let id = window.location.href.split("/")[3];
     setInputData(e.target.value);
-    socket.emit("new message", e.target.value);
+    socket.emit("new message", { message: e.target.value, id });
   };
 
   return (
