@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import io from "socket.io-client";
-import ENV from "./env";
-
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
+
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import InlineEditor from "@ckeditor/ckeditor5-build-inline";
+
+import "./App.css";
+import logo from "./logo.svg";
+import ENV from "./env";
+import Rte from "./RichTextEditor";
 
 const socket = io(ENV.backendAPIUrl);
 
@@ -81,14 +85,16 @@ const App = () => {
               <span key={username}>| {username} </span>
             ))}
             <p>Number of users online - {numberOfUsers}</p>
-            <textarea
-              onChange={(e) => onUserTyping(e)}
-              value={inputData}
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-            ></textarea>
+            <CKEditor
+              data={inputData}
+              editor={InlineEditor}
+              onChange={(event, editor) => {
+                let id = window.location.href.split("/")[3];
+                const data = editor.getData();
+                // setInputData(data);
+                socket.emit("new message", { message: data, id });
+              }}
+            />
           </div>
         ) : (
           <div>
@@ -107,3 +113,37 @@ const App = () => {
 };
 
 export default App;
+
+// return (
+//   <div className="App">
+//     <header className="App-header">
+//       <img src={logo} className="App-logo" alt="logo" />
+//       {isUserLoggedIn ? (
+//         <div style={{ marginBottom: 100 }}>
+//           {allUsers.map((username) => (
+//             <span key={username}>| {username} </span>
+//           ))}
+//           <p>Number of users online - {numberOfUsers}</p>
+//           <textarea
+//             onChange={(e) => onUserTyping(e)}
+//             value={inputData}
+//             name=""
+//             id=""
+//             cols="30"
+//             rows="10"
+//           ></textarea>
+//         </div>
+//       ) : (
+//         <div>
+//           <input
+//             placeholder="Login"
+//             type="text"
+//             value={username}
+//             onChange={(e) => onUsername(e)}
+//           />
+//           <button onClick={addUser}>Login</button>
+//         </div>
+//       )}
+//     </header>
+//   </div>
+// );
