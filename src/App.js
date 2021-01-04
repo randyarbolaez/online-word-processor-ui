@@ -5,6 +5,8 @@ import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import InlineEditor from "@ckeditor/ckeditor5-build-inline";
 
+import { Editor } from "@tinymce/tinymce-react";
+
 import "./App.css";
 import logo from "./logo.svg";
 import ENV from "./env";
@@ -69,11 +71,38 @@ const App = () => {
     setUsername(e.target.value);
   };
 
+  // const onUserTyping = (event, editor) => {
+  //   // let id = window.location.href.split("/")[3];
+  //   // setInputData(event.target.value);
+  //   // socket.emit("new message", { message: event.target.value, id });
+
+  //   let id = window.location.href.split("/")[3];
+  //   const data = editor.getData();
+  //   console.log(editor);
+  //   // setInputData(data);
+  //   socket.emit("new message", { message: data, id });
+  // };
+
   const onUserTyping = (e) => {
     let id = window.location.href.split("/")[3];
-    setInputData(e.target.value);
-    socket.emit("new message", { message: e.target.value, id });
+    console.log(e);
+    socket.emit("new message", { message: e, id });
+    // setInputData(e);
   };
+
+  // const onUserTyping = (e) => {
+  //   let id = window.location.href.split("/")[3];
+  //   setInputData(e.target.value);
+
+  //   socket.emit("new message", { message: e.target.value, id });
+  // };
+  // const onUserTyping = (e) => {
+  //   let id = window.location.href.split("/")[3];
+  //   setInputData(e.currentTarget.innerText);
+  //   console.log(e.target, "| e");
+
+  //   socket.emit("new message", { message: e.currentTarget.innerText, id });
+  // };
 
   return (
     <div className="App">
@@ -85,15 +114,13 @@ const App = () => {
               <span key={username}>| {username} </span>
             ))}
             <p>Number of users online - {numberOfUsers}</p>
-            <CKEditor
-              data={inputData}
-              editor={InlineEditor}
-              onChange={(event, editor) => {
-                let id = window.location.href.split("/")[3];
-                const data = editor.getData();
-                // setInputData(data);
-                socket.emit("new message", { message: data, id });
+            <Editor
+              value={inputData}
+              init={{
+                height: 500,
+                menubar: false,
               }}
+              onEditorChange={(e) => onUserTyping(e)}
             />
           </div>
         ) : (
@@ -114,6 +141,40 @@ const App = () => {
 
 export default App;
 
+// <CKEditor
+//   data={inputData}
+//   editor={InlineEditor}
+//   onChange={(event, editor) => onUserTyping(event, editor)}
+// />;
+
+// <CKEditor
+//   data={inputData}
+//   editor={InlineEditor}
+//   onChange={(event, editor) => {
+//     let id = window.location.href.split("/")[3];
+//     const data = editor.getData();
+//     // setInputData(data);
+//     socket.emit("new message", { message: data, id });
+//   }}
+// />;
+
+// <div
+//   contentEditable={true}
+//   suppressContentEditableWarning={true}
+//   onInput={(e) => onUserTyping(e)}
+// >
+//   {inputData}
+// </div>;
+
+// <Editor
+//   value={inputData}
+//   init={{
+//     height: 500,
+//     menubar: false,
+//   }}
+//   onEditorChange={(e) => onUserTyping(e)}
+// />;
+
 // return (
 //   <div className="App">
 //     <header className="App-header">
@@ -124,14 +185,14 @@ export default App;
 //             <span key={username}>| {username} </span>
 //           ))}
 //           <p>Number of users online - {numberOfUsers}</p>
-//           <textarea
-//             onChange={(e) => onUserTyping(e)}
-//             value={inputData}
-//             name=""
-//             id=""
-//             cols="30"
-//             rows="10"
-//           ></textarea>
+// <textarea
+// onChange={(e) => onUserTyping(e)}
+// value={inputData}
+//   name=""
+//   id=""
+//   cols="30"
+//   rows="10"
+// ></textarea>
 //         </div>
 //       ) : (
 //         <div>
