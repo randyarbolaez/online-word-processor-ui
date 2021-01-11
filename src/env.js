@@ -1,4 +1,4 @@
 export default {
+  backendAPIUrl: "https://online-word-processor-api.herokuapp.com/",
   // backendAPIUrl: "http://localhost:3000",
-  backendAPIUrl: "https://online-code-editor-throwaway-b.herokuapp.com/",
 };
