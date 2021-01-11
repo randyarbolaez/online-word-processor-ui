@@ -110,14 +110,6 @@ const Authentication = ({ getAuthenticationState, socket }) => {
         "Code Editor",
         `http://localhost:3000/${generatedID}`
       );
-<<<<<<< HEAD
-=======
-      // window.history.pushState(
-      //   { isUserLoggedIn },
-      //   "Code Editor",
-      //   `http://localhost:3001/${generatedID}`
-      // );
->>>>>>> f2c4b17c38abed25ca0f7fc2cca1efd149f57d8c
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, generatedID });
     }
