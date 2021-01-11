@@ -96,7 +96,7 @@ const Authentication = ({ getAuthenticationState, socket }) => {
 
   useEffect(() => {
     getAuthenticationState({ username, isUserLoggedIn });
-  }, [isUserLoggedIn, getAuthenticationState, username]);
+  });
 
   const addUser = (e) => {
     let generatedID = uuidv4();

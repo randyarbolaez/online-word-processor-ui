@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import MarkdownEditor from "./MarkdownEditor";
+
 const Container = styled.div`
-  /* background-color: purple;
-  height: 100vh; */
+  /* background-color: purple; */
+  /* height: 100vh; */
+  display: flex;
+`;
+
+const InformationWrapper = styled.div`
+  width: 20vw;
 `;
 
 const Home = ({ username, socket }) => {
@@ -25,15 +32,18 @@ const Home = ({ username, socket }) => {
       setNumberOfUsers(data.numUsers);
       setAllUsers(data.allUsers);
     });
-  }, []);
+  });
 
   return (
     <Container>
-      <p>Hello | {username}</p>
-      <p>Num of Users | {numberOfUsers}</p>
-      {allUsers.map((username) => (
-        <span key={username}>| {username} </span>
-      ))}
+      <MarkdownEditor socket={socket} />
+      <InformationWrapper>
+        <p>Hello | {username}</p>
+        <p>Num of Users | {numberOfUsers}</p>
+        {allUsers.map((username) => (
+          <span key={username}>| {username} </span>
+        ))}
+      </InformationWrapper>
     </Container>
   );
 };
