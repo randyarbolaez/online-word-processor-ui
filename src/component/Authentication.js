@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import io from "socket.io-client";
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 
 const Wrapper = styled.div`
@@ -111,6 +110,14 @@ const Authentication = ({ getAuthenticationState, socket }) => {
         "Code Editor",
         `http://localhost:3000/${generatedID}`
       );
+<<<<<<< HEAD
+=======
+      // window.history.pushState(
+      //   { isUserLoggedIn },
+      //   "Code Editor",
+      //   `http://localhost:3001/${generatedID}`
+      // );
+>>>>>>> f2c4b17c38abed25ca0f7fc2cca1efd149f57d8c
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, generatedID });
     }
