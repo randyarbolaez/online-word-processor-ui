@@ -49,16 +49,4 @@ const InformationAboutUsers = ({ username, numberOfUsers, allUsers }) => {
   );
 };
 
-// {
-//   allUsers.length <= 1 && (
-//     <span style={{ fontSize: "1.2vw" }}>|</span>
-//   );
-// }
-
-// {
-//   allUsers.length >= 1 && (
-//     <span style={{ fontSize: "1.2vw" }}>|</span>
-//   );
-// }
-
 export default InformationAboutUsers;
