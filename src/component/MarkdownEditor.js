@@ -25,8 +25,7 @@ const MarkdownEditor = ({ socket }) => {
         width: "85vw",
         resize: false,
       }}
-      // apiKey={ENV.tinyMCEKey}
-      apiKey={process.env.tinyMCEKey}
+      apiKey={ENV.tinyMCEKey}
       onEditorChange={(e) => onUserTyping(e)}
     />
   );

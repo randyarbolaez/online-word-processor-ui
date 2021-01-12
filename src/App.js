@@ -6,8 +6,7 @@ import Home from "./component/Home";
 
 import ENV from "./env";
 
-// const socket = io(ENV.backendAPIUrl);
-const socket = io(process.env.backendAPIUrl);
+const socket = io(ENV.backendAPIUrl);
 
 const App = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);

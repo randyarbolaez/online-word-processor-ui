@@ -105,10 +105,15 @@ const Authentication = ({ getAuthenticationState, socket }) => {
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, urlID });
     } else {
+      // window.history.pushState(
+      //   { isUserLoggedIn },
+      //   "Code Editor",
+      //   `http://localhost:3000/${generatedID}`
+      // );
       window.history.pushState(
         { isUserLoggedIn },
         "Code Editor",
-        `http://localhost:3000/${generatedID}`
+        `https://owpu.herokuapp.com/${generatedID}`
       );
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, generatedID });
