@@ -1,10 +1,10 @@
-# Check it Out
+# [Owpu](https://owpu.herokuapp.com/)
 
-[Website](https://owpu.herokuapp.com/)
+## [Backend](https://github.com/randyarbolaez/online-word-processor-api)
 
-## Backend
+## Tools used in this app
 
-[Api Code](https://github.com/randyarbolaez/online-word-processor-api)
+> WebSocket, Express, React, Node.js 
 
 ### Gif of Application
 ![Alt Text](./public/owpu.gif)
