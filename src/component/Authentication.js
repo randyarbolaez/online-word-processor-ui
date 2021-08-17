@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   margin: 15vh 10vw;
   color: #2f4550;
   font-size: 1vw;
+  justify-content: center;
 `;
 
 const AuthenticationContainer = styled.div`
@@ -37,31 +38,21 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 8vw;
+  width: 7vw;
   height: 3.5vh;
-
   font-size: 2.4vh;
-
   border: none;
-  border-radius: 25px;
-
-  color: #2f4550;
-  background-color: #da5552;
-
+  color: #aec5d0;
+  background-color: transparent;
+  border-bottom: 3px solid #f5d1d0;
   margin-top: 1.5vh;
-
   outline-width: 0;
+  transition: all 0.51s ease-in-out;
+
   :hover {
-    /* border: 1px solid yellow; */
-    background-color: transparent;
-    font-weight: bold;
-    color: #2f4550;
-
-    border-color: #da5552;
-    border-width: 1.5vw;
-    border-left-style: double;
-    border-right-style: double;
-
+    width: 6vw;
+    color: #03547c;
+    border-bottom: 3px solid transparent;
     cursor: pointer;
   }
 `;
@@ -91,8 +82,9 @@ const AboutText = styled.p`
 `;
 
 const Authentication = ({ getAuthenticationState, socket }) => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("r");
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   useEffect(() => {
     getAuthenticationState({ username, isUserLoggedIn });
@@ -127,6 +119,7 @@ const Authentication = ({ getAuthenticationState, socket }) => {
   return (
     <Wrapper>
       <AuthenticationContainer>
+        <h1>About</h1>
         <h1>Authentication</h1>
         <Input
           type="text"
@@ -135,26 +128,16 @@ const Authentication = ({ getAuthenticationState, socket }) => {
         />
         {username && <Button onClick={(e) => addUser(e)}>Login</Button>}
       </AuthenticationContainer>
-      <AboutContainer>
-        <h1>About</h1>
-        <AboutText>
-          What is this? This is an online word processor application — free to
-          use. You can use it with your friends or anybody that you wish or you
-          can you use it by yourself, it doesn't matter. Why did I build it? My
-          main goal was to build a word processor that didn't require you to
-          signup or take a couple of mins to start writing — usability was
-          definitely my priority but with improved usability there were
-          trade-offs. For example, I didn't want users to have to sign up for an
-          account so I'm not saving the word document it's up to you to save it,
-          once you leave the website the document is gone forever. The users
-          that I had in mind were students but anybody can use it; students were
-          my target audience because I wanted them to write notes in a team,
-          instead of one person writing notes and fearing that they might've
-          missed something important, with this application there are multiple
-          people writing real time notes and collaborating and significantly
-          harder to miss something that the professor said.
-        </AboutText>
-      </AboutContainer>
+      {showAbout && (
+        <AboutContainer>
+          <h1>About</h1>
+          <AboutText>
+            An online word processor application — free to use. You can use it
+            with your friends or anybody that you wish or you can you use it by
+            yourself, it doesn't matter.
+          </AboutText>
+        </AboutContainer>
+      )}
     </Wrapper>
   );
 };
