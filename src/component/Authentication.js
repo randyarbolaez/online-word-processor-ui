@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { FaQuestion } from "react-icons/fa";
 import styled from "styled-components";
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 
-const Wrapper = styled.div`
+const Container = styled.div`
   display: flex;
   height: 55vh;
   margin: 15vh 10vw;
+  color: #2f4550;
+  font-size: 1vw;
+  justify-content: center;
+  flex-direction: column;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  // height: 55vh;
+  height: 100%;
+  width: 100%;
+  // margin: 15vh 10vw;
   color: #2f4550;
   font-size: 1vw;
   justify-content: center;
@@ -38,8 +50,8 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 7vw;
-  height: 3.5vh;
+  width: 6vw;
+  height: 3.8vh;
   font-size: 2.4vh;
   border: none;
   color: #aec5d0;
@@ -50,7 +62,7 @@ const Button = styled.button`
   transition: all 0.51s ease-in-out;
 
   :hover {
-    width: 6vw;
+    width: 5vw;
     color: #03547c;
     border-bottom: 3px solid transparent;
     cursor: pointer;
@@ -117,28 +129,30 @@ const Authentication = ({ getAuthenticationState, socket }) => {
   };
 
   return (
-    <Wrapper>
-      <AuthenticationContainer>
-        <h1>About</h1>
-        <h1>Authentication</h1>
-        <Input
-          type="text"
-          placeholder="username"
-          onChange={(e) => onUsername(e)}
-        />
-        {username && <Button onClick={(e) => addUser(e)}>Login</Button>}
-      </AuthenticationContainer>
-      {showAbout && (
-        <AboutContainer>
-          <h1>About</h1>
-          <AboutText>
-            An online word processor application — free to use. You can use it
-            with your friends or anybody that you wish or you can you use it by
-            yourself, it doesn't matter.
-          </AboutText>
-        </AboutContainer>
-      )}
-    </Wrapper>
+    <Container>
+      <FaQuestion size={"25"} onClick={() => setShowAbout(!showAbout)} />
+      <Wrapper>
+        <AuthenticationContainer>
+          <h1>Authentication</h1>
+          <Input
+            type="text"
+            placeholder="username"
+            onChange={(e) => onUsername(e)}
+          />
+          {username && <Button onClick={(e) => addUser(e)}>Login</Button>}
+        </AuthenticationContainer>
+        {showAbout && (
+          <AboutContainer>
+            <h1>About</h1>
+            <AboutText>
+              An online word processor application — free to use. You can use it
+              with your friends or anybody that you wish or you can you use it
+              by yourself, it doesn't matter.
+            </AboutText>
+          </AboutContainer>
+        )}
+      </Wrapper>
+    </Container>
   );
 };
 
