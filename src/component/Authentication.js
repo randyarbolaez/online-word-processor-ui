@@ -12,9 +12,10 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
+
 const Wrapper = styled.div`
   display: flex;
-  // height: 55vh;
+  align-items: center;
   height: 100%;
   width: 100%;
   // margin: 15vh 10vw;
@@ -28,6 +29,7 @@ const AuthenticationContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 50%;
 
   width: 30%;
   background-color: #e39695;
@@ -40,13 +42,30 @@ const Input = styled.input`
   width: 10vw;
 
   outline-width: 0;
-  padding-left: 10pt;
+  // padding-left: 10pt;
 
   font-size: 1.7vh;
-  font-weight: bold;
+  font-size: 2vh;
+  color: #03547c;j
 
   border: solid 0.3vh #586f7c;
-  border-radius: 10px;
+  border: solid 0.3vh #f5d1d0;
+  // border-radius: 10px;
+  border: none;
+  border-bottom: 3px solid #f5d1d0;
+  text-align:center;
+
+  transition: all 0.51s ease-in-out;
+  background: none;
+
+  ::placeholder{
+    color: #aec5d0;
+  }
+
+  :hover {
+    // background: red;
+    border-bottom: 3px solid transparent;
+  }
 `;
 
 const Button = styled.button`
@@ -71,7 +90,8 @@ const Button = styled.button`
 
 const AboutContainer = styled.div`
   text-align: center;
-  width: 70%;
+  width: 30%;
+  height: 50%;
   background-color: #e4b1ab;
 
   border-top-right-radius: 5%;
@@ -79,6 +99,10 @@ const AboutContainer = styled.div`
   border-left-color: #da5552;
   border-left-width: 2.5vw;
   border-left-style: double;
+`;
+
+const AboutTitle = styled.h1`
+  // margin-bottom: 0;
 `;
 
 const AboutText = styled.p`
@@ -89,7 +113,7 @@ const AboutText = styled.p`
   text-align: left;
   word-wrap: break-word;
 
-  height: 40vh;
+  // height: 40vh;
   margin: 1vh 2vh;
 `;
 
@@ -130,7 +154,6 @@ const Authentication = ({ getAuthenticationState, socket }) => {
 
   return (
     <Container>
-      <FaQuestion size={"25"} onClick={() => setShowAbout(!showAbout)} />
       <Wrapper>
         <AuthenticationContainer>
           <h1>Authentication</h1>
@@ -140,10 +163,15 @@ const Authentication = ({ getAuthenticationState, socket }) => {
             onChange={(e) => onUsername(e)}
           />
           {username && <Button onClick={(e) => addUser(e)}>Login</Button>}
+          <FaQuestion
+            style={{ cursor: "pointer", marginTop: "1.5vh" }}
+            size={"25"}
+            onClick={() => setShowAbout(!showAbout)}
+          />
         </AuthenticationContainer>
         {showAbout && (
           <AboutContainer>
-            <h1>About</h1>
+            <AboutTitle>About</AboutTitle>
             <AboutText>
               An online word processor application — free to use. You can use it
               with your friends or anybody that you wish or you can you use it
