@@ -155,7 +155,7 @@ const Authentication = ({ getAuthenticationState, socket }) => {
   return (
     <Container>
       <Wrapper>
-        <AuthenticationContainer>
+        <AuthenticationContainer style={{ borderRadius: !showAbout && "5%" }}>
           <h1>Authentication</h1>
           <Input
             type="text"
