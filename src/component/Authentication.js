@@ -118,7 +118,7 @@ const AboutText = styled.p`
 `;
 
 const Authentication = ({ getAuthenticationState, socket }) => {
-  const [username, setUsername] = useState("r");
+  const [username, setUsername] = useState("");
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
 
@@ -128,21 +128,33 @@ const Authentication = ({ getAuthenticationState, socket }) => {
 
   const addUser = (e) => {
     let generatedID = uuidv4();
+    if (window.confirm("Would you like to send link to somebody?")) {
+      let emailOfPerson = window.prompt("Email of person");
+      window.open(
+        `mailto:${emailOfPerson}?subject=${`Link from ${username}`}&body=Hi friend,
+        %0D%0A%0D%0ALet's collaborate!%0D%0A%0D%0Ahttps://owpu.herokuapp.com/${generatedID}
+        %0D%0A%0D%0AThanks,
+        %0D%0A${username}`
+      );
+      console.log(emailOfPerson, "open mail client");
+    } else {
+      console.log('don"t oppen mail client');
+    }
     if (uuidValidate(window.location.href.split("/")[3])) {
       let urlID = window.location.href.split("/")[3];
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, urlID });
     } else {
-      // window.history.pushState(
-      //   { isUserLoggedIn },
-      //   "Code Editor",
-      //   `http://localhost:3000/${generatedID}`
-      // );
       window.history.pushState(
         { isUserLoggedIn },
         "Code Editor",
-        `https://owpu.herokuapp.com/${generatedID}`
+        `http://localhost:3000/${generatedID}`
       );
+      // window.history.pushState(
+      //   { isUserLoggedIn },
+      //   "Code Editor",
+      //   `https://owpu.herokuapp.com/${generatedID}`
+      // );
       setIsUserLoggedIn(true);
       socket.emit("add user", { username, generatedID });
     }
