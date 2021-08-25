@@ -18,7 +18,6 @@ const Wrapper = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  // margin: 15vh 10vw;
   color: #2f4550;
   font-size: 1vw;
   justify-content: center;
@@ -30,11 +29,19 @@ const AuthenticationContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 50%;
+  // height: 60%;
 
   width: 30%;
   background-color: #e39695;
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
+`;
+
+const AuthenticationWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60%;
 `;
 
 const Input = styled.input`
@@ -63,7 +70,6 @@ const Input = styled.input`
   }
 
   :hover {
-    // background: red;
     border-bottom: 3px solid transparent;
   }
 `;
@@ -101,9 +107,7 @@ const AboutContainer = styled.div`
   border-left-style: double;
 `;
 
-const AboutTitle = styled.h1`
-  // margin-bottom: 0;
-`;
+const AboutTitle = styled.h1``;
 
 const AboutText = styled.p`
   display: flex;
@@ -143,16 +147,6 @@ const Authentication = ({ getAuthenticationState, socket }) => {
       socket.emit("add user", { username, urlID });
     } else {
       let urlProtocol = window.location.href.split(":")[0];
-      // window.history.pushState(
-      //   { isUserLoggedIn },
-      //   "Code Editor",
-      //   `http://localhost:3000/${generatedID}`
-      // );
-      // window.history.pushState(
-      //   { isUserLoggedIn },
-      //   "Code Editor",
-      //   `https://owpu.herokuapp.com/${generatedID}`
-      // );
       window.history.pushState(
         { isUserLoggedIn },
         "Code Editor",
@@ -173,17 +167,19 @@ const Authentication = ({ getAuthenticationState, socket }) => {
       <Wrapper>
         <AuthenticationContainer style={{ borderRadius: !showAbout && "5%" }}>
           <h1>Authentication</h1>
-          <Input
-            type="text"
-            placeholder="username"
-            onChange={(e) => onUsername(e)}
-          />
-          {username && <Button onClick={(e) => addUser(e)}>Login</Button>}
-          <FaQuestion
-            style={{ cursor: "pointer", marginTop: "1.5vh" }}
-            size={"25"}
-            onClick={() => setShowAbout(!showAbout)}
-          />
+          <AuthenticationWrapper>
+            <Input
+              type="text"
+              placeholder="username"
+              onChange={(e) => onUsername(e)}
+            />
+            {username && <Button onClick={(e) => addUser(e)}>Login</Button>}
+            <FaQuestion
+              style={{ cursor: "pointer", marginTop: "1.5vh" }}
+              size={"25"}
+              onClick={() => setShowAbout(!showAbout)}
+            />
+          </AuthenticationWrapper>
         </AuthenticationContainer>
         {showAbout && (
           <AboutContainer>
