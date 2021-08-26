@@ -41,7 +41,7 @@ const AuthenticationWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60%;
+  height: 40%;
 `;
 
 const Input = styled.input`
@@ -166,7 +166,7 @@ const Authentication = ({ getAuthenticationState, socket }) => {
     <Container>
       <Wrapper>
         <AuthenticationContainer style={{ borderRadius: !showAbout && "5%" }}>
-          <h1>Authentication</h1>
+          <h1 style={{ marginTop: "3vh" }}>Authentication</h1>
           <AuthenticationWrapper>
             <Input
               type="text"
@@ -174,12 +174,12 @@ const Authentication = ({ getAuthenticationState, socket }) => {
               onChange={(e) => onUsername(e)}
             />
             {username && <Button onClick={(e) => addUser(e)}>Login</Button>}
-            <FaQuestion
-              style={{ cursor: "pointer", marginTop: "1.5vh" }}
-              size={"25"}
-              onClick={() => setShowAbout(!showAbout)}
-            />
           </AuthenticationWrapper>
+          <FaQuestion
+            style={{ cursor: "pointer", paddingBottom: "5vh" }}
+            size={"25"}
+            onClick={() => setShowAbout(!showAbout)}
+          />
         </AuthenticationContainer>
         {showAbout && (
           <AboutContainer>
