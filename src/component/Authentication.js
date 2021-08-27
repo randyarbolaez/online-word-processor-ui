@@ -49,28 +49,22 @@ const Input = styled.input`
   width: 10vw;
 
   outline-width: 0;
-  // padding-left: 10pt;
-
-  font-size: 1.7vh;
   font-size: 2vh;
-  color: #03547c;j
 
-  border: solid 0.3vh #586f7c;
-  border: solid 0.3vh #f5d1d0;
-  // border-radius: 10px;
   border: none;
   border-bottom: 3px solid #f5d1d0;
-  text-align:center;
+  text-align: center;
 
   transition: all 0.51s ease-in-out;
   background: none;
 
-  ::placeholder{
+  ::placeholder {
     color: #aec5d0;
   }
 
   :hover {
-    border-bottom: 3px solid transparent;
+    border-bottom: 3px solid #03547c;
+    color: #03547c;
   }
 `;
 
@@ -169,6 +163,11 @@ const Authentication = ({ getAuthenticationState, socket }) => {
           <h1 style={{ marginTop: "3vh" }}>Authentication</h1>
           <AuthenticationWrapper>
             <Input
+              style={{
+                borderBottom: username
+                  ? "3px solid #03547c"
+                  : "3px solid #f5d1d0",
+              }}
               type="text"
               placeholder="username"
               onChange={(e) => onUsername(e)}
