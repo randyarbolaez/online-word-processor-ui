@@ -27,6 +27,9 @@ const Home = ({ username, socket }) => {
       setNumberOfUsers(data.numUsers);
       setAllUsers(data.allUsers);
     });
+    document.title = `OWPU | ${numberOfUsers} ${
+      numberOfUsers > 1 ? "Users" : "User"
+    } Online`;
   });
 
   return (
